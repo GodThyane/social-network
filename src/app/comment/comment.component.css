@@ -1,0 +1,103 @@
+.card-header {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  background: #242526;
+  color: #e4e6eb;
+  border-bottom: 3px solid #2f3031;
+  margin-bottom: 20px;
+}
+
+.card-date{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.body-text{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.card-body {
+  background: #3a3b3c;
+  color: #e4e6eb;
+  border-radius: 20px;
+}
+
+.card-body:hover {
+  background: #3a3b3c;
+}
+
+.card-footer {
+  background: #242526;
+  border-top: 3px solid #2f3031;
+}
+
+.date {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn {
+  background: #242526;
+  transition-duration: 200ms;
+}
+
+.btn-comment:hover .btn {
+  background: rgba(45,135,255, 0.2);
+}
+
+.blue {
+  color: #e4e6eb;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+.btn-comment:hover .blue{
+  color: #2d88ff;
+}
+
+
+.red{
+  color: #e4e6eb;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+
+.btn-dislike:hover .btn {
+  background: rgba(254,3,91, 0.2);
+}
+
+.btn-dislike:hover .red{
+  color: #fe035b;
+}
+
+.green{
+  color: #e4e6eb;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+
+.btn-like:hover .btn {
+  background: rgba(3,254,116, 0.2);
+}
+
+.btn-like:hover .green{
+  color: #03fe74;
+}
+
+.comment{
+  color: #D5FFFF;
+  background: #3a3b3c;
+  border: 0;
+  box-shadow: none;
+  border-radius: 50px;
+}
+
+.border-circular{
+  border-radius: 50px;
+}

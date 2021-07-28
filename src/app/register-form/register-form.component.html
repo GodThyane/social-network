@@ -1,0 +1,99 @@
+<div class="center_div" style="border-radius: 10px;">
+  <blockquote class="blockquote text-center m-0 p-0">
+    <h1 id="MainTitle">Registro</h1>
+  </blockquote>
+
+  <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-register">
+    <div class="form-group">
+      <label id="titletxt" for="exampleInputEmail1">Dirección de correo electrónico
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="!email.valid && email.touched && !isExistEmail">El correo electrónico es inválido
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="isExistEmail">El correo electrónico ya existe, ingrese otro
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+      </label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese un correo electrónico"
+             aria-describedby="emailHelp" #email="ngModel" name="email" [(ngModel)]="user.email" email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+      <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con nadie</small>
+    </div>
+    <div class="form-group">
+      <label id="titletxt" for="exampleInputEmail1">Nombre de Usuario
+
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="!nick.valid && nick.touched && !isNick">El nombre de usuario es necesario
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="isNick">El nombre de usuario ya existe, ingrese otro
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+
+      </label>
+      <input class="form-control" id="exampleInputEmail1" placeholder="Ingrese un nombre de Usuario"
+             aria-describedby="emailHelp" #nick="ngModel" name="nick" [(ngModel)]="user.username" required>
+    </div>
+    <div class="form-group">
+      <label id="titletxt" for="exampleInputPassword1">Contraseña
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="!passw.valid && passw.touched">La contraseña es necesaria
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+      </label>
+      <input type="password" class="form-control" style="margin-bottom: 10px" id="exampleInputPassword1"
+             placeholder="Ingrese una Contraseña"
+             #passw="ngModel" name="passw" [(ngModel)]="user.password" required
+      >
+      <span class="badge badge-warning" style="margin: 6px;"
+            *ngIf="!isEqual() && passc.touched">Las contraseñas no coinciden
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirme la Contraseña"
+             #passc="ngModel" name="passc" [(ngModel)]="user.password_confirm" required
+      >
+    </div>
+
+    <div class="form-group">
+      <label id="titletxt" for="date">Fecha de nacimiento
+        <span class="badge badge-warning" style="margin-left: 6px"
+              *ngIf="bdate.touched && !isAdult()">No tiene la edad necesaria
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+      </label>
+      <input id="date" type="date" value="{{getDateActual()}}" max="{{getDateActual()}}" class="form-control"
+             #bdate="ngModel" name="bdate" [(ngModel)]="user.birthdate" required
+      >
+    </div>
+
+    <input id="confirm" value="Registrarse" type="submit" style="margin-bottom: 20px"
+           class="btn btn-primary btn-lg btn-block"
+           [disabled]="!formUser.form.valid || isInValid()">
+    <div class="notAccount">
+      <p class="text-center" style="font-style: italic">
+        ¿Ya tienes cuenta?
+      </p>
+    </div>
+    <button id="Login" type="button" [routerLink]="['/login']" class="btn btn-outline-primary btn-lg btn-block m-0">Iniciar
+      sesión
+    </button>
+  </form>
+</div>

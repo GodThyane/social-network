@@ -1,0 +1,16 @@
+<div class="ml-5 mr-5" *ngIf="comment">
+  <div class="card-body mt-3 pt-2">
+
+    <a class="date" style="color: #e4e6eb" data-toggle="tooltip"
+       data-placement="bottom"
+       title="{{getDates()}}">
+      {{getDaysAgo()}}
+    </a>
+
+    <p class="justify-content-center body-text mt-2 mb-0">
+      {{comment.content}}
+    </p>
+    <a class="date" style="color: #e4e6eb; font-weight: normal">
+    </a>
+  </div>
+</div>

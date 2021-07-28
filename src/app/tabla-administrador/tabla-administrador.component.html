@@ -1,0 +1,84 @@
+<div class="center_div" style="border-radius: 10px">
+  <blockquote class="blockquote text-center m-0 p-0">
+    <h1 id="MainTitle">Administrar</h1>
+  </blockquote>
+  <div class="table-responsive tableedit" *ngIf="users.length > 0">
+    <table class="table table-dark" style="background-color: #3a3b3c;">
+      <thead>
+      <tr>
+        <th scope="col">Pseudonimo</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Estado</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users | paginate: { id: 'listing_pagination',
+        itemsPerPage : 10,
+        currentPage: page,
+        totalItems: totalRecords
+      }">
+        <th scope="row">{{user.username}}</th>
+        <td>{{user.email}}</td>
+        <td>
+          <div class="btn-group">
+            <label for="exampleFormControlSelect1"></label><select class="form-control" id="exampleFormControlSelect1"
+                                                                   [(ngModel)]="user.role">
+            <option (click)="update(user)">A</option>
+            <option (click)="update(user)">U</option>
+          </select>
+          </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-secondary w-50"
+                  (click)="user.state = 2;changeHab(user.pk)" style="min-width: 120px" *ngIf="user.state == 1">
+            Deshabilitar
+          </button>
+          <button type="button" class="btn btn-secondary w-50"
+                  data-target="#exampleModalCenter"
+                  (click)="user.state = 1;changeHab(user.pk)" style="min-width: 120px" *ngIf="user.state != 1">Habilitar
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive tableedit" *ngIf="users.length == 0">
+    <p>
+      Cargando usuarios...
+    </p>
+  </div>
+  <div class="text-right" style="border-top: 3px solid #2f3031; padding-top: 10px">
+    <pagination-controls id="listing_pagination" maxSize="9"
+                         directionLinks="true"
+                         autoHide="true"
+                         responsive="true"
+                         previousLabel="Atrás"
+                         nextLabel="Siguiente"
+                         screenReaderPaginationLabel="Pagination"
+                         screenReaderPageLabel="page"
+                         screenReaderCurrentLabel="You're on page"
+                         (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">¡Advertencia!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro de querer eliminar este usuario?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="remove()" data-dismiss="modal">Eliminar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

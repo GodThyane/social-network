@@ -1,0 +1,42 @@
+<div class="center_div" style="border-radius: 10px">
+  <blockquote class="blockquote text-center m-0 p-0">
+    <h1 id="MainTitle">Inicio de Sesión</h1>
+  </blockquote>
+
+  <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login">
+    <div class="form-group">
+      <label id="titletxt" for="exampleInputEmail1">Nombre de usuario
+        <span class="badge badge-warning" style="margin-left: 6px" *ngIf="!email.valid && email.touched">El nombre de usuario es necesario
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#exclamation-square-fill"/>
+          </svg>
+          </span>
+      </label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese un correo electrónico ó nombre de usuario"
+             aria-describedby="emailHelp" #email="ngModel" name="email" [(ngModel)]="user.username" required>
+    </div>
+    <div class="form-group">
+      <label id="titletxt" for="exampleInputPassword1">Contraseña
+
+        <span class="badge badge-danger" style="margin-left: 6px" *ngIf="pass.valid && passwordB">La contraseña es incorrecta
+          <svg class="bi" width="20" height="30" fill="currentColor" style="margin-left: 6px">
+            <use xlink:href="bootstrap-icons.svg#x-square-fill"/>
+          </svg>
+          </span>
+      </label>
+      <input #pass="ngModel" name="pass" [(ngModel)]="user.password" type="password" class="form-control"
+             id="exampleInputPassword1" placeholder="Ingrese la contraseña" required>
+    </div>
+    <input type="submit" value="Iniciar Sesión" [disabled]="!formUser.form.valid"
+           class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px">
+    <div class="notAccount">
+      <p class="text-center" style="font-style: italic">
+        ¿No tienes una cuenta?
+      </p>
+    </div>
+    <button id="register" type="button" [routerLink]="['/register']" class="btn btn-outline-primary m-0 btn-lg btn-block">
+      Crear una
+      cuenta nueva
+    </button>
+  </form>
+</div>

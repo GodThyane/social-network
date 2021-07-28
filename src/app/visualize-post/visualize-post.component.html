@@ -1,0 +1,162 @@
+<nav>
+  <div class="nav nav-tabs bg-dark" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link bg-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+       aria-controls="nav-profile" aria-selected="false" (click)="recentOrder()">Recientes</a>
+    <div class="btn-group">
+      <label for="exampleFormControlSelect1"></label><select class="custom-select"
+                                                             style="background: #3a3b3c; color: white; border-color: #242526"
+                                                             id="exampleFormControlSelect1">
+      <option selected disabled>Categoría</option>
+      <option *ngFor=" let category of categories" [value]="category" (click)="filter(category.pk)">{{category.name_category}}</option>
+      <option selected (click)="reset()">Todo</option>
+      </select>
+    </div>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent" *ngIf="isLoad">
+  <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="posts" *ngFor="let post of posts">
+      <div class="card margin-90">
+        <div class="card-body" [routerLink]="['/post',post.pk]" (click)="hide()">
+          <p class="card-title">
+            {{post.name_post}}
+          </p>
+          <p class="justify-content-center body-text">
+            {{post.post_content}}
+          </p>
+        </div>
+
+        <div class="reaction">
+          <div class="btn btn-comment m-0 p-0" [routerLink]="['/posts',post.pk]" (click)="hide()">
+            <button class="blue rounded-circle mr-1 btn" type="button"
+            >
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#chat-square"/>
+              </svg>
+            </button>
+            <label class="blue" *ngIf="post.size == 0">
+            </label>
+            <label class="blue" *ngIf="post.size != 0">
+              {{post.size}}
+            </label>
+          </div>
+
+          <div class="btn btn-like ml-3 p-0">
+            <button class="green rounded-circle mr-1 btn" type="button"
+                    [routerLink]="['/create-post']">
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#hand-thumbs-up"/>
+              </svg>
+            </button>
+            <label class="green">
+              123
+            </label>
+          </div>
+
+          <div class="btn btn-dislike ml-3 p-0">
+            <button class="red rounded-circle mr-1 btn" type="button"
+                    [routerLink]="['/create-post']">
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#hand-thumbs-down"/>
+              </svg>
+            </button>
+            <label class="red">
+              123
+            </label>
+          </div>
+        </div>
+
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+  >
+    <div class="posts" *ngFor="let post of posts">
+      <div class="card margin-90">
+
+        <div class="mt-3 mb-3">
+          <a class="font-weight-bold" style="color: #e3f1ff; cursor: pointer">
+            {{post.userName}}
+          </a>
+        </div>
+
+
+        <div class="card-body" [routerLink]="['/posts',post.pk]" (click)="hide()">
+
+          <p class="card-title">
+            {{post.name_post}}
+            <a class="date ml-3" style="color: #e4e6eb; font-weight: normal" data-toggle="tooltip"
+               data-placement="bottom" *ngIf="categories.length>0">
+              {{post.name_category}}
+            </a>
+
+          </p>
+
+          <p class="justify-content-center">
+            {{post.post_content}}
+          </p>
+        </div>
+
+
+        <div class="reaction">
+          <div class="btn btn-comment m-0 p-0" [routerLink]="['/posts',post.pk]" (click)="hide()">
+            <button class="blue rounded-circle mr-1 btn" type="button"
+            >
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#chat-square"/>
+              </svg>
+            </button>
+            <label class="blue" *ngIf="post.size == 0">
+            </label>
+            <label class="blue" *ngIf="post.size != 0">
+              {{post.size}}
+            </label>
+          </div>
+
+          <div class="btn btn-like ml-3 p-0">
+            <button class="green rounded-circle mr-1 btn" type="button"
+                    [routerLink]="['/create-post']">
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#hand-thumbs-up"/>
+              </svg>
+            </button>
+            <label class="green">
+              123
+            </label>
+          </div>
+
+          <div class="btn btn-dislike ml-3 p-0">
+            <button class="red rounded-circle mr-1 btn" type="button"
+                    [routerLink]="['/create-post']">
+              <svg class="bi" width="20" height="30" fill="currentColor">
+                <use xlink:href="bootstrap-icons.svg#hand-thumbs-down"/>
+              </svg>
+            </button>
+            <label class="red">
+              123
+            </label>
+          </div>
+
+          <a class="date m-2 float-right" style="color: #e4e6eb; font-weight: normal" data-toggle="tooltip"
+             data-placement="bottom"
+             title="{{getDate(post.date_created)}}">
+            {{getDaysAgo(post.date_created)}}
+          </a>
+
+        </div>
+
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoad">
+  <p class="text-white">
+    Cargando...
+  </p>
+</div>

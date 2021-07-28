@@ -1,0 +1,34 @@
+<div class="center_div">
+  <div class="align-items-center title">
+    <h3 style="font-weight: bold;">
+      Crear publicación
+    </h3>
+  </div>
+  <form #formPost="ngForm" (ngSubmit)="create()" id="form-post">
+    <div class="form-group">
+      <label id="titletxt" for="formGroupExampleInput">Titulo de la entrada</label>
+      <span class="badge badge-danger" *ngIf="!title.valid && title.touched">El título es obligatorio</span>
+      <input type="text" #title="ngModel" name="title" [(ngModel)]="post.name_post" class="form-control" id="formGroupExampleInput" placeholder="Título" required>
+
+    </div>
+    <div class="btn-group">
+      <label for="exampleFormControlSelect1"></label><select class="custom-select"
+                                                             style="background: #3a3b3c; color: white; border-color: #242526"
+                                                             id="exampleFormControlSelect1">
+      <option selected disabled>Categoría</option>
+      <option *ngFor=" let category of categories" [value]="category" (click)="send(category)">{{category.name_category}}</option>
+    </select>
+    </div>
+    <div class="form-group">
+      <label id="contentxt" for="exampleFormControlTextarea1">Contenido de la entrada</label>
+      <span class="badge badge-danger" *ngIf="!content.valid && content.touched">El contenido es obligatorio</span>
+      <textarea #content="ngModel" name="content" [(ngModel)]="post.post_content" class="form-control" id="exampleFormControlTextarea1" rows="8" required></textarea>
+    </div>
+    <div class="d-flex justify-content-around">
+      <input type="submit" value="Publicar entrada" [disabled]="!formPost.form.valid" class="btn btn-outline-success btn-lg mr-2 btn-block">
+      <button type="button" class="btn btn-outline-danger btn-lg btn-block" (click)="home()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<simple-notifications></simple-notifications>

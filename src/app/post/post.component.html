@@ -1,0 +1,80 @@
+<div class="card margin-90" *ngIf="post">
+
+  <div class="card-body">
+
+    <p class="card-title">
+      {{post.name_post}}
+    </p>
+
+    <p class="justify-content-center body-text">
+      {{post.post_content}}
+    </p>
+
+    <a class="date" style="color: #e4e6eb; font-weight: normal">
+      {{getDates()}}
+    </a>
+
+  </div>
+
+  <div class="reaction">
+    <div class="btn btn-comment m-0 p-0">
+      <button class="blue rounded-circle mr-1 btn" type="button"
+              [routerLink]="['/posts',post.pk]">
+        <svg class="bi" width="20" height="30" fill="currentColor">
+          <use xlink:href="bootstrap-icons.svg#chat-square"/>
+        </svg>
+      </button>
+      <label class="blue">
+        {{post.size}}
+      </label>
+    </div>
+
+    <div class="btn btn-like ml-3 p-0">
+      <button class="green rounded-circle mr-1 btn" type="button"
+              [routerLink]="['/create-post']">
+        <svg class="bi" width="20" height="30" fill="currentColor">
+          <use xlink:href="bootstrap-icons.svg#hand-thumbs-up"/>
+        </svg>
+      </button>
+      <label class="green">
+        123
+      </label>
+    </div>
+
+    <div class="btn btn-dislike ml-3 p-0">
+      <button class="red rounded-circle mr-1 btn" type="button"
+              [routerLink]="['/create-post']">
+        <svg class="bi" width="20" height="30" fill="currentColor">
+          <use xlink:href="bootstrap-icons.svg#hand-thumbs-down"/>
+        </svg>
+      </button>
+      <label class="red">
+        123
+      </label>
+    </div>
+  </div>
+
+
+  <div class="input-group border-circular p-1 pl-3 mt-3 mb-3" style="background: #3a3b3c;">
+    <input type="text" #comm2 #comm="ngModel" name="comm" [(ngModel)]="commentario.content" class="form-control comment"
+           placeholder="Escriba un comentario" (keydown.enter)="comment()" autofocus>
+    <button class="red rounded-circle mr-1 btn btn-send" type="button"
+            (click)="comment()">
+      <svg class="bi" width="20" height="30" fill="currentColor">
+        <use xlink:href="bootstrap-icons.svg#reply-all-fill"/>
+      </svg>
+    </button>
+  </div>
+
+  <div style="border-bottom: 3px solid #2f3031">
+
+  </div>
+    <div class="mb-3 animate__animated animate__backInDown" *ngFor="let comment of post.comment">
+      <app-comment
+        [comment]="comment"></app-comment>
+    </div>
+  <div class="card-footer">
+  </div>
+</div>
+
+<simple-notifications></simple-notifications>

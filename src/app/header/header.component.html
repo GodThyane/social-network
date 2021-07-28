@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top justify-content-between"
+     style="background: #242526 !important; border: 2px solid #2f3031;">
+  <a class="navbar-brand" [routerLink]="['']">RedSocial</a>
+
+  <div class="navbar" *ngIf="isLogged">
+    <button class="btn rounded-circle mr-2 mybtn" type="button"
+            data-toggle="tooltip" data-placement="bottom" title="Crear publicación" [routerLink]="['/create-post']"
+            (click)="hide()">
+      <svg class="bi" width="20" height="30" fill="currentColor">
+        <use xlink:href="bootstrap-icons.svg#plus"/>
+      </svg>
+    </button>
+
+    <button class="btn rounded-circle mr-2 mybtn" type="button" data-target="#exampleModalCenter"
+            data-toggle="modal" *ngIf="isAdmin">
+      <svg class="bi" width="20" height="30" fill="currentColor" data-toggle="tooltip" data-placement="bottom"
+           title="Crear categoría">
+        <use xlink:href="bootstrap-icons.svg#tag-fill"/>
+      </svg>
+    </button>
+
+    <div class="dropdown show" data-placement="bottom" title="Cuenta">
+      <a class="btn-lg dropdown-toggle rounded-circle mybtn" href="#" role="button"
+         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-right border-card" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item dpitem" [routerLink]="['/admin']" (click)="hide()" *ngIf="isAdmin">
+          <svg class="bi mr-1" width="20" height="30" fill="currentColor">
+            <use xlink:href="bootstrap-icons.svg#shield-fill-exclamation"/>
+          </svg>
+          Administrar</a>
+        <a class="dropdown-item dpitem" (click)="logOut()" style="cursor: pointer">
+          <svg class="bi mr-1 " width="20" height="30" fill="currentColor">
+            <use xlink:href="bootstrap-icons.svg#door-closed"/>
+          </svg>
+          Cerrar sesión</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title col-11 text-center" id="exampleModalLongTitle" style="color: #242526;">Crear nueva
+          categoría</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="Nombre de categoría" #category="ngModel" name="category"
+               [(ngModel)]="categoria.name_category">
+      </div>
+      <div class="modal-footer d-flex justify-content-around">
+        <button type="button" class="btn btn-outline-success btn-lg btn-block" data-dismiss="modal"
+                (click)="createCategory()">Crear
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-lg btn-block" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
